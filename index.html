@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    <!-- attach CSS file here -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <header>
+    <h1>I am an H1</h1>
+</header>
+<!-- let attack the conatiner -->
+<div class="container">
+    <section>
+        <div class="wrapper">
+            <label for="salary" class="label">
+                Salary
+            </label>
+            <div class="input-box">
+                <span>$</span>
+                <input type="number" value="0.00" id="salary" class="value">
+            </div>
+        </div>
+        <div class="wrapper">
+            <span class="label">Bonus</span>
+            <span id="bonus-amount" class="value">
+                $0
+            </span>
+        </div>
+        <hr>
+        <div class="wrapper">
+            <span class="label">Total Amount</span>
+            <span id="total-amount" class="value">
+                $0
+            </span>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper">
+            <label for="bonus" class="label">
+                Bonus %
+            </label>
+            <span id="bonus-percent" class="value">
+                0
+            </span>
+        </div>
+        <input type="range" min="1" id="bonus" value="15">
+        <div class="wrapper">
+            <label for="no-of-people" class="label">
+                No. Of People
+            </label>
+            <span id="split-num" class="value">
+                0
+            </span>
+        </div>
+        <input type="range" min="1" max="15" id="no-of-people" value="1">
+    </section>
+    <section>
+        <div class="wrapper">
+            <span class="label">
+                Bonus Per Person
+            </span>
+            <span id="bonus-per-person" class="value">
+                $0
+            </span>
+        </div>
+        <div class="wrapper">
+            <span class="label">
+                Total Per Person
+            </span>
+            <span id="total-per-person" class="value">
+                $0
+            </span>
+        </div>
+    </section>
+</div>
+
+    <script src="index.js"></script>
+</body>
+</html>
