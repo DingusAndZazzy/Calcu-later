@@ -1,0 +1,26 @@
+.label {
+  margin: 10%;
+  padding: 10%;
+}
+
+body {
+  margin-left: 30%;
+  font-weight: bold;
+  background-image: linear-gradient(white, turquoise, white);
+}
+
+input {
+  margin: 5px;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+.calc__controls-wrapper {
+  background-color: lightblue;
+  margin-right: 30%;
+  padding-left: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
