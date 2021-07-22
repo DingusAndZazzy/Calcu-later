@@ -1,13 +1,9 @@
-.label {
+/* .label {
   margin: 10%;
   padding: 10%;
 }
 
-body {
-  margin-left: 30%;
-  font-weight: bold;
-  background-image: linear-gradient(white, turquoise, white);
-}
+
 
 input {
   margin: 5px;
@@ -23,4 +19,35 @@ h3 {
   padding-left: 10%;
   padding-top: 10px;
   padding-bottom: 10px;
+} */
+
+body {
+  margin-left: 5%;
+  font-weight: bold;
+}
+
+h3 {
+  background-color: #ef3744;
+  color: aliceblue;
+  margin-right: 5%;
+  padding: 1%;
+}
+/* The graph */
+.calc__results-wrapper {
+  float: right;
+  width: 50%;
+  padding-bottom: 75%;
+}
+
+.w-layout-grid-calc__form-grid {
+  float: left;
+  width: 50%;
+}
+
+.calc__field-wrapper {
+  background-color: lightgrey;
+  margin-right: 10%;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
