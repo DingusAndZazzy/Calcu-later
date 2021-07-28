@@ -1,883 +1,375 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
+<style>
+      /* .label {
+  margin: 10%;
+  padding: 10%;
+}
+
+
+
+input {
+  margin: 5px;
+}
+
+h3 {
+  text-decoration: underline;
+}
+
+.calc__controls-wrapper {
+  background-color: lightblue;
+  margin-right: 30%;
+  padding-left: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.calc-heading{
+  font-family: 'Poppins', sans-serif !important;
+  color: white !important;
+}
+
+h4{
+  font-family: 'Poppins', sans-serif;
+}
+/* The graph */
+.calc__results-wrapper {
+  float: right;
+  width: 50%;
+  padding-bottom: 75%;
+}
+
+.w-layout-grid-calc__form-grid {
+  float: left;
+  width: 50%;
+}
+
+.calc__field-wrapper {
+  margin-right: 10%;
+  padding-left: 2%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#SvgjsPath1084{
+  fill: #ef3744;
+}
+
+.calc__field-label{
+  font-family: 'Poppins', sans-serif;
+}
+
+#savings{
+  font-family: 'Poppins', sans-serif;
+}
+
+.apexcharts-tooltip-title{
+  font-family: 'Poppins', sans-serif;
+}
+
+    </style>
     <script
       src="https://code.jquery.com/jquery-3.6.0.slim.js"
       integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY="
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="w-layout-grid-calc__grid">
-      <div class="calc__controls-wrapper">
-        <h3 class="fw-bold">
-          Calculate your labor savings with Dingus & Zazzy
-        </h3>
-        <div class="calc__form-wrapper-w-form">
-          <form
-            id="email-form"
-            name="email-form"
-            data-name="Email Form"
-            class="calc__form"
-          >
-            <div class="w-layout-grid-calc__form-grid">
-              <div class="calc__field-wrapper">
-                <div>
-                  <label for="name" class="calc__field-label"
-                    >Average hourly rate per foreman</label
-                  >
-                </div>
-                <div class="calc__input-field-wrapper">
-                  <div class="calc__dollar-label">$</div>
-                  <input
-                    type="number"
-                    class="calc__input-field w-input"
-                    maxlength="256"
-                    name="foreman-rate"
-                    data-name="foreman-rate"
-                    min="1"
-                    id="foreman-rate"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div class="calc__field-wrapper">
-                <div>
-                  <label for="name" class="calc__field-label"
-                    >Average salary of purchasing managers</label
-                  >
-                </div>
-                <div class="calc__input-field-wrapper">
-                  <div class="calc__dollar-label">$</div>
-                  <input
-                    type="number"
-                    class="calc__input-field w-input"
-                    maxlength="256"
-                    name="agent-rate"
-                    data-name="agent-rate"
-                    min="1"
-                    id="agent-rate"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div class="calc__field-wrapper">
-                <div>
-                  <label for="name" class="calc__field-label"
-                    >How many POs and requisitions do you process per
-                    year</label
-                  >
-                  <div class="calc__field-subtext">
-                    <em
-                      >The typical electrical contractor processes 450 POs per
-                      $1M in sales</em
-                    ><span class="superscript"><em> 2</em></span>
-                  </div>
-                </div>
-                <div class="calc__input-field-wrapper">
-                  <input
-                    type="number"
-                    class="calc__input-field w-input"
-                    maxlength="256"
-                    name="po-total"
-                    data-name="po-total"
-                    min="1"
-                    id="po-total"
-                    required=""
-                  />
-                  <div class="calc__min-label">POs</div>
-                </div>
-              </div>
-              <div class="calc__field-wrapper">
-                <div>
-                  <label for="name" class="calc__field-label"
-                    >How much time do your foremen spend on one PO or
-                    requisition</label
-                  >
-                </div>
-                <div class="calc__input-field-wrapper">
-                  <input
-                    type="number"
-                    class="calc__input-field w-input"
-                    maxlength="256"
-                    name="foreman-time"
-                    data-name="foreman-time"
-                    min="1"
-                    id="foreman-time"
-                    required=""
-                  />
-                  <div class="calc__min-label">min</div>
-                </div>
-              </div>
-              <div class="calc__field-wrapper">
-                <div>
-                  <label for="name" class="calc__field-label"
-                    >How much time do your purchasing agents spend on one PO or
-                    requisition</label
-                  >
-                </div>
-                <div class="calc__input-field-wrapper">
-                  <input
-                    type="number"
-                    class="calc__input-field w-input"
-                    maxlength="256"
-                    name="agent-time"
-                    data-name="agent-time"
-                    min="1"
-                    id="agent-time"
-                    required=""
-                  />
-                  <div class="calc__min-label">min</div>
-                </div>
-              </div>
-            </div>
-          </form>
-          <div class="w-form-done"></div>
-          <div class="w-form-fail"></div>
-        </div>
-      </div>
-      <div
-        id="w-node-_7c4750c3-a726-5912-dc51-769c70151df2-76bc290e"
-        class="calculator__results-wrapper"
-      >
-        <div class="calc__results-wrapper" style="position: relative">
-          <h4 class="calc__results-heading">
-            Annual Savings with Dingus & Zazzy
-          </h4>
-          <div class="calc__savings">
-            $<span id="savings" class="text-span-14">117,228</span>
-          </div>
-          <div id="chart" class="calc__chart-wrapper" style="min-height: 315px">
-            <div
-              id="apexcharts6s5lt508"
-              class="
-                apexcharts-canvas
-                apexcharts6s5lt508
-                apexcharts-theme-light
-              "
-              style="width: 424px; height: 300px"
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <div class="calc-container">
+      <div class="w-layout-grid-calc__grid">
+        <div class="calc__controls-wrapper">
+          <div class="calc__form-wrapper-w-form">
+            <form
+              id="email-form"
+              name="email-form"
+              data-name="Email Form"
+              class="calc__form"
             >
-              <svg
-                id="SvgjsSvg1064"
-                width="424"
-                height="300"
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.1"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns:svgjs="http://svgjs.com/svgjs"
-                class="apexcharts-svg"
-                xmlns:data="ApexChartsNS"
-                transform="translate(0, 0)"
-                style="background: transparent"
-              >
-                <g
-                  id="SvgjsG1066"
-                  class="apexcharts-inner apexcharts-graphical"
-                  transform="translate(51.359375, 30)"
-                >
-                  <defs id="SvgjsDefs1065">
-                    <linearGradient
-                      id="SvgjsLinearGradient1070"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
+              <div class="w-layout-grid-calc__form-grid">
+                <div class="calc__field-wrapper">
+                  <div>
+                    <label for="name" class="calc__field-label"
+                      >Average hourly rate per foreman</label
                     >
-                      <stop
-                        id="SvgjsStop1071"
-                        stop-opacity="0.4"
-                        stop-color="rgba(216,227,240,0.4)"
-                        offset="0"
-                      ></stop>
-                      <stop
-                        id="SvgjsStop1072"
-                        stop-opacity="0.5"
-                        stop-color="rgba(190,209,230,0.5)"
-                        offset="1"
-                      ></stop>
-                      <stop
-                        id="SvgjsStop1073"
-                        stop-opacity="0.5"
-                        stop-color="rgba(190,209,230,0.5)"
-                        offset="1"
-                      ></stop>
-                    </linearGradient>
-                    <clipPath id="gridRectMask6s5lt508">
-                      <rect
-                        id="SvgjsRect1075"
-                        width="366.640625"
-                        height="232.348"
-                        x="-2"
-                        y="0"
-                        rx="0"
-                        ry="0"
-                        opacity="1"
-                        stroke-width="0"
-                        stroke="none"
-                        stroke-dasharray="0"
-                        fill="#fff"
-                      ></rect>
-                    </clipPath>
-                    <clipPath id="forecastMask6s5lt508"></clipPath>
-                    <clipPath id="nonForecastMask6s5lt508"></clipPath>
-                    <clipPath id="gridRectMarkerMask6s5lt508">
-                      <rect
-                        id="SvgjsRect1076"
-                        width="366.640625"
-                        height="236.348"
-                        x="-2"
-                        y="-2"
-                        rx="0"
-                        ry="0"
-                        opacity="1"
-                        stroke-width="0"
-                        stroke="none"
-                        stroke-dasharray="0"
-                        fill="#fff"
-                      ></rect>
-                    </clipPath>
-                  </defs>
-                  <rect
-                    id="SvgjsRect1074"
-                    width="145.05625"
-                    height="232.348"
-                    x="17.679638671874997"
-                    y="0"
-                    rx="0"
-                    ry="0"
-                    opacity="1"
-                    stroke-width="0"
-                    stroke-dasharray="3"
-                    fill="url(#SvgjsLinearGradient1070)"
-                    class="apexcharts-xcrosshairs"
-                    y2="232.348"
-                    filter="none"
-                    fill-opacity="0.9"
-                    x1="17.679638671874997"
-                    x2="17.679638671874997"
-                  ></rect>
-                  <g
-                    id="SvgjsG1085"
-                    class="apexcharts-xaxis"
-                    transform="translate(0, 0)"
-                  >
-                    <g
-                      id="SvgjsG1086"
-                      class="apexcharts-xaxis-texts-g"
-                      transform="translate(0, -4)"
-                    >
-                      <text
-                        id="SvgjsText1088"
-                        font-family="Helvetica, Arial, sans-serif"
-                        x="90.66015625"
-                        y="261.348"
-                        text-anchor="middle"
-                        dominant-baseline="auto"
-                        font-size="12px"
-                        font-weight="400"
-                        fill="#373d3f"
-                        class="apexcharts-text apexcharts-xaxis-label"
-                        style="font-family: Helvetica, Arial, sans-serif"
-                      >
-                        <tspan id="SvgjsTspan1089">Current Costs</tspan>
-                        <title>Current Costs</title>
-                      </text>
-                      <text
-                        id="SvgjsText1091"
-                        font-family="Helvetica, Arial, sans-serif"
-                        x="271.98046875"
-                        y="261.348"
-                        text-anchor="middle"
-                        dominant-baseline="auto"
-                        font-size="12px"
-                        font-weight="400"
-                        fill="#373d3f"
-                        class="apexcharts-text apexcharts-xaxis-label"
-                        style="font-family: Helvetica, Arial, sans-serif"
-                      >
-                        <tspan id="SvgjsTspan1092">Dingus & Zazzy Costs</tspan>
-                        <title>Dingus & Zazzy Costs</title>
-                      </text>
-                    </g>
-                    <line
-                      id="SvgjsLine1093"
-                      x1="0"
-                      y1="233.348"
-                      x2="362.640625"
-                      y2="233.348"
-                      stroke="#e0e0e0"
-                      stroke-dasharray="0"
-                      stroke-width="1"
-                    ></line>
-                  </g>
-                  <g id="SvgjsG1106" class="apexcharts-grid">
-                    <g id="SvgjsG1107" class="apexcharts-gridlines-horizontal">
-                      <line
-                        id="SvgjsLine1112"
-                        x1="0"
-                        y1="0"
-                        x2="362.640625"
-                        y2="0"
-                        stroke="#e0e0e0"
-                        stroke-dasharray="0"
-                        class="apexcharts-gridline"
-                      ></line>
-                      <line
-                        id="SvgjsLine1113"
-                        x1="0"
-                        y1="58.087"
-                        x2="362.640625"
-                        y2="58.087"
-                        stroke="#e0e0e0"
-                        stroke-dasharray="0"
-                        class="apexcharts-gridline"
-                      ></line>
-                      <line
-                        id="SvgjsLine1114"
-                        x1="0"
-                        y1="116.174"
-                        x2="362.640625"
-                        y2="116.174"
-                        stroke="#e0e0e0"
-                        stroke-dasharray="0"
-                        class="apexcharts-gridline"
-                      ></line>
-                      <line
-                        id="SvgjsLine1115"
-                        x1="0"
-                        y1="174.26100000000002"
-                        x2="362.640625"
-                        y2="174.26100000000002"
-                        stroke="#e0e0e0"
-                        stroke-dasharray="0"
-                        class="apexcharts-gridline"
-                      ></line>
-                      <line
-                        id="SvgjsLine1116"
-                        x1="0"
-                        y1="232.348"
-                        x2="362.640625"
-                        y2="232.348"
-                        stroke="#e0e0e0"
-                        stroke-dasharray="0"
-                        class="apexcharts-gridline"
-                      ></line>
-                    </g>
-                    <g
-                      id="SvgjsG1108"
-                      class="apexcharts-gridlines-vertical"
-                    ></g>
-                    <line
-                      id="SvgjsLine1109"
-                      x1="0"
-                      y1="233.348"
-                      x2="0"
-                      y2="239.348"
-                      stroke="#e0e0e0"
-                      stroke-dasharray="0"
-                      class="apexcharts-xaxis-tick"
-                    ></line>
-                    <line
-                      id="SvgjsLine1110"
-                      x1="181.3203125"
-                      y1="233.348"
-                      x2="181.3203125"
-                      y2="239.348"
-                      stroke="#e0e0e0"
-                      stroke-dasharray="0"
-                      class="apexcharts-xaxis-tick"
-                    ></line>
-                    <line
-                      id="SvgjsLine1111"
-                      x1="362.640625"
-                      y1="233.348"
-                      x2="362.640625"
-                      y2="239.348"
-                      stroke="#e0e0e0"
-                      stroke-dasharray="0"
-                      class="apexcharts-xaxis-tick"
-                    ></line>
-                    <line
-                      id="SvgjsLine1118"
-                      x1="0"
-                      y1="232.348"
-                      x2="362.640625"
-                      y2="232.348"
-                      stroke="transparent"
-                      stroke-dasharray="0"
-                    ></line>
-                    <line
-                      id="SvgjsLine1117"
-                      x1="0"
-                      y1="1"
-                      x2="0"
-                      y2="232.348"
-                      stroke="transparent"
-                      stroke-dasharray="0"
-                    ></line>
-                  </g>
-                  <g
-                    id="SvgjsG1077"
-                    class="apexcharts-bar-series apexcharts-plot-series"
-                  >
-                    <g
-                      id="SvgjsG1078"
-                      class="apexcharts-series"
-                      rel="1"
-                      seriesName="CurrentxCosts"
-                      data:realIndex="0"
-                    >
-                      <path
-                        id="SvgjsPath1082"
-                        d="M18.132031249999997 232.348L18.132031249999997 7.633599916666668Q18.132031249999997 7.633599916666668 18.132031249999997 7.633599916666668L163.18828125 7.633599916666668Q163.18828125 7.633599916666668 163.18828125 7.633599916666668L163.18828125 7.633599916666668L163.18828125 232.348L163.18828125 232.348L18.132031249999997 232.348C18.132031249999997 232.348 18.132031249999997 232.348 18.132031249999997 232.348C18.132031249999997 232.348 18.13203125000001 232.348 18.13203125000001 232.348C18.13203125000001 232.348 18.13203125000001 232.348 18.13203125000001 232.348C18.13203125000001 232.348 18.13203125000001 232.348 18.13203125000001 232.348C18.13203125000001 232.348 18.13203125000001 232.348 18.13203125000001 232.348C18.13203125000001 232.348 18.13203125000001 232.348 18.13203125000001 232.348C18.13203125000001 232.348 18.132031249999997 232.348 18.132031249999997 232.348 "
-                        fill="rgba(62,74,81,0.85)"
-                        fill-opacity="1"
-                        stroke-opacity="1"
-                        stroke-linecap="round"
-                        stroke-width="0"
-                        stroke-dasharray="0"
-                        class="apexcharts-bar-area"
-                        index="0"
-                        clip-path="url(#gridRectMask6s5lt508)"
-                        pathTo="M 18.132031249999997 232.348L 18.132031249999997 7.633599916666668Q 18.132031249999997 7.633599916666668 18.132031249999997 7.633599916666668L 163.18828125 7.633599916666668Q 163.18828125 7.633599916666668 163.18828125 7.633599916666668L 163.18828125 7.633599916666668L 163.18828125 232.348L 163.18828125 232.348z"
-                        pathFrom="M 18.743750000000006 232.348L 18.743750000000006 232.348Q 18.743750000000006 232.348 18.743750000000006 232.348L 168.69375 232.348Q 168.69375 232.348 168.69375 232.348L 168.69375 232.348L 168.69375 232.348L 168.69375 232.348zL 18.132031249999997 232.348L 163.18828125 232.348L 163.18828125 232.348L 163.18828125 232.348L 163.18828125 232.348L 163.18828125 232.348L 18.132031249999997 232.348"
-                        cy="7.633599916666668"
-                        cx="199.45234375"
-                        j="0"
-                        val="232115"
-                        barHeight="224.71440008333335"
-                        barWidth="145.05625"
-                      ></path>
-                      <path
-                        id="SvgjsPath1084"
-                        d="M199.45234375 232.348L199.45234375 121.12398051666668Q199.45234375 121.12398051666668 199.45234375 121.12398051666668L344.50859375000005 121.12398051666668Q344.50859375000005 121.12398051666668 344.50859375000005 121.12398051666668L344.50859375000005 121.12398051666668L344.50859375000005 232.348L344.50859375000005 232.348L199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348C199.45234375 232.348 199.45234375 232.348 199.45234375 232.348 "
-                        fill="rgba(235,114,20,0.85)"
-                        fill-opacity="1"
-                        stroke-opacity="1"
-                        stroke-linecap="round"
-                        stroke-width="0"
-                        stroke-dasharray="0"
-                        class="apexcharts-bar-area"
-                        index="0"
-                        clip-path="url(#gridRectMask6s5lt508)"
-                        pathTo="M 199.45234375 232.348L 199.45234375 121.12398051666668Q 199.45234375 121.12398051666668 199.45234375 121.12398051666668L 344.50859375000005 121.12398051666668Q 344.50859375000005 121.12398051666668 344.50859375000005 121.12398051666668L 344.50859375000005 121.12398051666668L 344.50859375000005 232.348L 344.50859375000005 232.348z"
-                        pathFrom="M 206.18125 232.348L 206.18125 232.348Q 206.18125 232.348 206.18125 232.348L 356.13125 232.348Q 356.13125 232.348 356.13125 232.348L 356.13125 232.348L 356.13125 232.348L 356.13125 232.348zL 199.45234375 232.348L 344.50859375000005 232.348L 344.50859375000005 232.348L 344.50859375000005 232.348L 344.50859375000005 232.348L 344.50859375000005 232.348L 199.45234375 232.348"
-                        cy="121.12398051666668"
-                        cx="380.77265625"
-                        j="1"
-                        val="114887"
-                        barHeight="111.22401948333334"
-                        barWidth="145.05625"
-                      ></path>
-                      <g
-                        id="SvgjsG1080"
-                        class="apexcharts-bar-goals-markers"
-                        style="pointer-events: none"
-                      >
-                        <g
-                          id="SvgjsG1081"
-                          className="apexcharts-bar-goals-groups"
-                        ></g>
-                        <g
-                          id="SvgjsG1083"
-                          className="apexcharts-bar-goals-groups"
-                        ></g>
-                      </g>
-                    </g>
-                    <g
-                      id="SvgjsG1079"
-                      class="apexcharts-datalabels"
-                      data:realIndex="0"
-                    ></g>
-                  </g>
-                  <line
-                    id="SvgjsLine1119"
-                    x1="0"
-                    y1="0"
-                    x2="362.640625"
-                    y2="0"
-                    stroke="#b6b6b6"
-                    stroke-dasharray="0"
-                    stroke-width="1"
-                    class="apexcharts-ycrosshairs"
-                  ></line>
-                  <line
-                    id="SvgjsLine1120"
-                    x1="0"
-                    y1="0"
-                    x2="362.640625"
-                    y2="0"
-                    stroke-dasharray="0"
-                    stroke-width="0"
-                    class="apexcharts-ycrosshairs-hidden"
-                  ></line>
-                  <g id="SvgjsG1121" class="apexcharts-yaxis-annotations"></g>
-                  <g id="SvgjsG1122" class="apexcharts-xaxis-annotations"></g>
-                  <g id="SvgjsG1123" class="apexcharts-point-annotations"></g>
-                </g>
-                <g
-                  id="SvgjsG1094"
-                  class="apexcharts-yaxis"
-                  rel="0"
-                  transform="translate(21.359375, 0)"
-                >
-                  <g id="SvgjsG1095" class="apexcharts-yaxis-texts-g">
-                    <text
-                      id="SvgjsText1096"
-                      font-family="Helvetica, Arial, sans-serif"
-                      x="20"
-                      y="31.4"
-                      text-anchor="end"
-                      dominant-baseline="auto"
-                      font-size="11px"
-                      font-weight="400"
-                      fill="#373d3f"
-                      class="apexcharts-text apexcharts-yaxis-label"
-                      style="font-family: Helvetica, Arial, sans-serif"
-                    >
-                      <tspan id="SvgjsTspan1097">240k</tspan>
-                      <title>240k</title>
-                    </text>
-                    <text
-                      id="SvgjsText1098"
-                      font-family="Helvetica, Arial, sans-serif"
-                      x="20"
-                      y="89.48700000000001"
-                      text-anchor="end"
-                      dominant-baseline="auto"
-                      font-size="11px"
-                      font-weight="400"
-                      fill="#373d3f"
-                      class="apexcharts-text apexcharts-yaxis-label"
-                      style="font-family: Helvetica, Arial, sans-serif"
-                    >
-                      <tspan id="SvgjsTspan1099">180k</tspan>
-                      <title>180k</title>
-                    </text>
-                    <text
-                      id="SvgjsText1100"
-                      font-family="Helvetica, Arial, sans-serif"
-                      x="20"
-                      y="147.574"
-                      text-anchor="end"
-                      dominant-baseline="auto"
-                      font-size="11px"
-                      font-weight="400"
-                      fill="#373d3f"
-                      class="apexcharts-text apexcharts-yaxis-label"
-                      style="font-family: Helvetica, Arial, sans-serif"
-                    >
-                      <tspan id="SvgjsTspan1101">120k</tspan>
-                      <title>120k</title>
-                    </text>
-                    <text
-                      id="SvgjsText1102"
-                      font-family="Helvetica, Arial, sans-serif"
-                      x="20"
-                      y="205.66100000000003"
-                      text-anchor="end"
-                      dominant-baseline="auto"
-                      font-size="11px"
-                      font-weight="400"
-                      fill="#373d3f"
-                      class="apexcharts-text apexcharts-yaxis-label"
-                      style="font-family: Helvetica, Arial, sans-serif"
-                    >
-                      <tspan id="SvgjsTspan1103">60k</tspan>
-                      <title>60k</title>
-                    </text>
-                    <text
-                      id="SvgjsText1104"
-                      font-family="Helvetica, Arial, sans-serif"
-                      x="20"
-                      y="263.748"
-                      text-anchor="end"
-                      dominant-baseline="auto"
-                      font-size="11px"
-                      font-weight="400"
-                      fill="#373d3f"
-                      class="apexcharts-text apexcharts-yaxis-label"
-                      style="font-family: Helvetica, Arial, sans-serif"
-                    >
-                      <tspan id="SvgjsTspan1105">0k</tspan>
-                      <title>0k</title>
-                    </text>
-                  </g>
-                </g>
-                <g id="SvgjsG1067" class="apexcharts-annotations"></g>
-              </svg>
-              <div class="apexcharts-legend" style="max-height: 150px"></div>
-              <div
-                class="apexcharts-tooltip apexcharts-theme-light"
-                style="left: 141.567px; top: 1px"
-              >
-                <div
-                  class="apexcharts-tooltip-title"
-                  style="
-                    font-family: Helvetica, Arial, sans-serif;
-                    font-size: 12px;
-                  "
-                >
-                  Current Costs
+                  </div>
+                  <div class="calc__input-field-wrapper">
+                    <div class="calc__dollar-label">$</div>
+                    <input
+                      type="number"
+                      class="calc__input-field w-input"
+                      maxlength="256"
+                      name="foreman-rate"
+                      data-name="foreman-rate"
+                      min="1"
+                      id="foreman-rate"
+                      required=""
+                    />
+                  </div>
                 </div>
-                <div
-                  class="apexcharts-tooltip-series-group apexcharts-active"
-                  style="order: 1; display: flex"
-                >
-                  <span
-                    class="apexcharts-tooltip-marker"
-                    style="background-color: rgba(62, 74, 81, 0.85)"
-                  ></span>
-                  <div
-                    class="apexcharts-tooltip-text"
-                    style="
-                      font-family: Helvetica, Arial, sans-serif;
-                      font-size: 12px;
-                    "
-                  >
-                    <div class="apexcharts-tooltip-y-group">
-                      <span class="apexcharts-tooltip-text-y-label"
-                        >Current Costs: </span
-                      ><span class="apexcharts-tooltip-text-y-value"
-                        >$ 232,115</span
-                      >
+                <div class="calc__field-wrapper">
+                  <div>
+                    <label for="name" class="calc__field-label"
+                      >Average salary of purchasing managers</label
+                    >
+                  </div>
+                  <div class="calc__input-field-wrapper">
+                    <div class="calc__dollar-label">$</div>
+                    <input
+                      type="number"
+                      class="calc__input-field w-input"
+                      maxlength="256"
+                      name="agent-rate"
+                      data-name="agent-rate"
+                      min="1"
+                      id="agent-rate"
+                      required=""
+                    />
+                  </div>
+                </div>
+                <div class="calc__field-wrapper">
+                  <div>
+                    <label for="name" class="calc__field-label"
+                      >How many POs and requisitions do you process per
+                      year</label
+                    >
+                    <div class="calc__field-subtext">
+                      <em
+                        >The typical electrical contractor processes 450 POs per
+                        $1M in sales</em
+                      ><span class="superscript"><em> 2</em></span>
                     </div>
-                    <div class="apexcharts-tooltip-goals-group">
-                      <span class="apexcharts-tooltip-text-goals-label"></span
-                      ><span class="apexcharts-tooltip-text-goals-value"></span>
-                    </div>
-                    <div class="apexcharts-tooltip-z-group">
-                      <span class="apexcharts-tooltip-text-z-label"></span
-                      ><span class="apexcharts-tooltip-text-z-value"></span>
-                    </div>
+                  </div>
+                  <div class="calc__input-field-wrapper">
+                    <input
+                      type="number"
+                      class="calc__input-field w-input"
+                      maxlength="256"
+                      name="po-total"
+                      data-name="po-total"
+                      min="1"
+                      id="po-total"
+                      required=""
+                    />
+                    <div class="calc__min-label">POs</div>
+                  </div>
+                </div>
+                <div class="calc__field-wrapper">
+                  <div>
+                    <label for="name" class="calc__field-label"
+                      >How much time do your foremen spend on one PO or
+                      requisition</label
+                    >
+                  </div>
+                  <div class="calc__input-field-wrapper">
+                    <input
+                      type="number"
+                      class="calc__input-field w-input"
+                      maxlength="256"
+                      name="foreman-time"
+                      data-name="foreman-time"
+                      min="1"
+                      id="foreman-time"
+                      required=""
+                    />
+                    <div class="calc__min-label">min</div>
+                  </div>
+                </div>
+                <div class="calc__field-wrapper">
+                  <div>
+                    <label for="name" class="calc__field-label"
+                      >How much time do your purchasing agents spend on one PO or
+                      requisition</label
+                    >
+                  </div>
+                  <div class="calc__input-field-wrapper">
+                    <input
+                      type="number"
+                      class="calc__input-field w-input"
+                      maxlength="256"
+                      name="agent-time"
+                      data-name="agent-time"
+                      min="1"
+                      id="agent-time"
+                      required=""
+                    />
+                    <div class="calc__min-label">min</div>
                   </div>
                 </div>
               </div>
-              <div
-                class="
-                  apexcharts-yaxistooltip
-                  apexcharts-yaxistooltip-0
-                  apexcharts-yaxistooltip-left
-                  apexcharts-theme-light
-                "
-              >
-                <div class="apexcharts-yaxistooltip-text"></div>
-              </div>
-              <div class="apexcharts-toolbar" style="top: 0px; right: 3px">
-                <div class="apexcharts-menu-icon" title="Menu">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <!-- <path fill="none" d="M0 0h24v24H0V0z"></path>
-                    <path
-                      d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                    ></path>
-                  </svg>
-                </div> -->
-                <!-- <div class="apexcharts-menu">
-                  <div
-                    class="apexcharts-menu-item exportSVG"
-                    title="Download SVG"
-                  >
-                    Download SVG
-                  </div>
-                  <div
-                    class="apexcharts-menu-item exportPNG"
-                    title="Download PNG"
-                  >
-                    Download PNG
-                  </div>
-                  <div
-                    class="apexcharts-menu-item exportCSV"
-                    title="Download CSV"
-                  >
-                    Download CSV
-                  </div> -->
-                <!-- </div>
-              </div>
-            </div>
-          </div>
-          <div class="resize-triggers">
-            <div class="expand-trigger">
-              <div style="width: 521px; height: 540px"></div>
-            </div>
-            <div class="contract-trigger"></div>
+            </form>
+            <div class="w-form-done"></div>
+            <div class="w-form-fail"></div>
           </div>
         </div>
-        <div class="calc__disclaimer">
-          <span class="superscript">1 </span>NECA<br /><span class="superscript"
-            >2</span
-          >
-          https://www.ecmag.com/section/your-business/procurement-management-electrical-contracting-industry
-        </div>
-      </div>
-    </div> -->
-    <script>
-      class ROICalculator {
-        constructor($form, $savings, $chart) {
-          this.$form = $form;
-          this.$savings = $savings;
-          this.$chart = $chart;
-          this.savings;
-          this.currentCost;
-          this.chart;
-
-          // Input Elements
-          this.$foremanRate = $form.find("input[name=foreman-rate");
-          this.$agentRate = $form.find("input[name=agent-rate");
-          this.$poTotal = $form.find("input[name=po-total");
-          this.$foremanTime = $form.find("input[name=foreman-time");
-          this.$agentTime = $form.find("input[name=agent-time");
-
-          // Input Values & Defaults
-          this.foremanRate = 80;
-          this.agentRate = 75000;
-          this.poTotal = 4000;
-          this.foremanTime = 30;
-          this.agentTime = 30;
-        }
-
-        attachEventHandlers() {
-          this.$form.submit(function (e) {
-            e.preventDefault();
-            this.update();
-            return false;
-          });
-
-          this.$foremanRate.change(() => this.update());
-          this.$agentRate.change(() => this.update());
-          this.$poTotal.change(() => this.update());
-          this.$foremanTime.change(() => this.update());
-          this.$agentTime.change(() => this.update());
-        }
-
-        formatDollar(x) {
-          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        showSavings() {
-          this.$savings.text(
-            this.formatDollar(this.currentCost - this.savings)
-          );
-        }
-
-        getLatestValues() {
-          this.foremanRate = this.$foremanRate.val();
-          this.agentRate = this.$agentRate.val();
-          this.poTotal = this.$poTotal.val();
-          this.foremanTime = this.$foremanTime.val();
-          this.agentTime = this.$agentTime.val();
-        }
-
-        calculateCurrentCost() {
-          return Math.round(
-            (this.foremanRate * (this.foremanTime / 60) +
-              (this.agentRate / 2080) * (this.agentTime / 60)) *
-              this.poTotal
-          );
-        }
-
-        calculateSavings() {
-          return Math.round(
-            (((this.foremanTime * 0.38) / 60) * this.foremanRate +
-              ((this.agentTime * 0.75) / 60) * (this.agentRate / 2080)) *
-              this.poTotal
-          );
-        }
-
-        initChart() {
-          var options = {
-            series: [
+        <div
+          id="w-node-_7c4750c3-a726-5912-dc51-769c70151df2-76bc290e"
+          class="calculator__results-wrapper"
+        >
+          <div class="calc__results-wrapper" style="position: relative">
+            <h4 class="calc__results-heading">
+              Annual Savings with Nevaka
+            </h4>
+            <div class="calc__savings">
+              $<span id="savings" class="text-span-14">117,228</span>
+            </div>
+            <div id="chart" class="calc__chart-wrapper" style="min-height: 315px"></div>     
+      <script>
+        class ROICalculator {
+          constructor($form, $savings, $chart) {
+            this.$form = $form;
+            this.$savings = $savings;
+            this.$chart = $chart;
+            this.savings;
+            this.currentCost;
+            this.chart;
+  
+            // Input Elements
+            this.$foremanRate = $form.find("input[name=foreman-rate");
+            this.$agentRate = $form.find("input[name=agent-rate");
+            this.$poTotal = $form.find("input[name=po-total");
+            this.$foremanTime = $form.find("input[name=foreman-time");
+            this.$agentTime = $form.find("input[name=agent-time");
+  
+            // Input Values & Defaults
+            this.foremanRate = 80;
+            this.agentRate = 75000;
+            this.poTotal = 4000;
+            this.foremanTime = 30;
+            this.agentTime = 30;
+          }
+  
+          attachEventHandlers() {
+            this.$form.submit(function (e) {
+              e.preventDefault();
+              this.update();
+              return false;
+            });
+  
+            this.$foremanRate.change(() => this.update());
+            this.$agentRate.change(() => this.update());
+            this.$poTotal.change(() => this.update());
+            this.$foremanTime.change(() => this.update());
+            this.$agentTime.change(() => this.update());
+          }
+  
+          formatDollar(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          }
+  
+          showSavings() {
+            this.$savings.text(
+              this.formatDollar(this.currentCost - this.savings)
+            );
+          }
+  
+          getLatestValues() {
+            this.foremanRate = this.$foremanRate.val();
+            this.agentRate = this.$agentRate.val();
+            this.poTotal = this.$poTotal.val();
+            this.foremanTime = this.$foremanTime.val();
+            this.agentTime = this.$agentTime.val();
+          }
+  
+          calculateCurrentCost() {
+            return Math.round(
+              (this.foremanRate * (this.foremanTime / 60) +
+                (this.agentRate / 2080) * (this.agentTime / 60)) *
+                this.poTotal
+            );
+          }
+  
+          calculateSavings() {
+            return Math.round(
+              (((this.foremanTime * 0.38) / 60) * this.foremanRate +
+                ((this.agentTime * 0.75) / 60) * (this.agentRate / 2080)) *
+                this.poTotal
+            );
+          }
+  
+          initChart() {
+            var options = {
+              series: [
+                {
+                  name: "Current Costs",
+                  data: [0, 0],
+                },
+              ],
+              colors: ["#3E4A51", "#ef3744"],
+              chart: {
+                type: "bar",
+                height: 300,
+              },
+              dataLabels: {
+                enabled: false,
+              },
+              xaxis: {
+                categories: ["Current Costs", "Agora Costs"],
+              },
+              yaxis: {
+                labels: {
+                  formatter: (val, index) => {
+                    return `${(val / 1000).toFixed(0)}k`;
+                  },
+                },
+              },
+              plotOptions: {
+                bar: {
+                  columnWidth: "80%",
+                  distributed: true,
+                },
+              },
+              tooltip: {
+                y: {
+                  formatter: (val) => {
+                    return "$ " + this.formatDollar(val);
+                  },
+                },
+              },
+              toolbar: {
+                show: false,
+              },
+              legend: {
+                show: false,
+              },
+            };
+  
+            this.chart = new ApexCharts(this.$chart, options);
+            this.chart.render();
+          }
+  
+          updateChart() {
+            this.chart.updateSeries([
               {
-                name: "Current Costs",
-                data: [0, 0],
+                data: [this.currentCost, this.savings],
               },
-            ],
-            colors: ["#3E4A51", "#EB7214"],
-            chart: {
-              type: "bar",
-              height: 300,
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            xaxis: {
-              categories: ["Current Costs", "Agora Costs"],
-            },
-            yaxis: {
-              labels: {
-                formatter: (val, index) => {
-                  return `${(val / 1000).toFixed(0)}k`;
-                },
-              },
-            },
-            plotOptions: {
-              bar: {
-                columnWidth: "80%",
-                distributed: true,
-              },
-            },
-            tooltip: {
-              y: {
-                formatter: (val) => {
-                  return "$ " + this.formatDollar(val);
-                },
-              },
-            },
-            toolbar: {
-              show: false,
-            },
-            legend: {
-              show: false,
-            },
-          };
-
-          this.chart = new ApexCharts(this.$chart, options);
-          this.chart.render();
+            ]);
+          }
+  
+          update() {
+            this.getLatestValues();
+            this.currentCost = this.calculateCurrentCost();
+            this.savings = this.calculateSavings();
+            this.showSavings();
+            this.updateChart();
+          }
+  
+          init() {
+            this.$foremanRate.val(this.foremanRate);
+            this.$agentRate.val(this.agentRate);
+            this.$poTotal.val(this.poTotal);
+            this.$foremanTime.val(this.foremanTime);
+            this.$agentTime.val(this.agentTime);
+            this.attachEventHandlers();
+            this.initChart();
+            this.update();
+          }
         }
-
-        updateChart() {
-          this.chart.updateSeries([
-            {
-              data: [this.currentCost, this.savings],
-            },
-          ]);
-        }
-
-        update() {
-          this.getLatestValues();
-          this.currentCost = this.calculateCurrentCost();
-          this.savings = this.calculateSavings();
-          this.showSavings();
-          this.updateChart();
-        }
-
-        init() {
-          this.$foremanRate.val(this.foremanRate);
-          this.$agentRate.val(this.agentRate);
-          this.$poTotal.val(this.poTotal);
-          this.$foremanTime.val(this.foremanTime);
-          this.$agentTime.val(this.agentTime);
-          this.attachEventHandlers();
-          this.initChart();
-          this.update();
-        }
-      }
-
-      var calculator = new ROICalculator(
-        $(".calc__form"),
-        $("#savings"),
-        document.querySelector("#chart")
-      );
-      calculator.init();
-    </script>
-  </body>
-</html>
+  
+        var calculator = new ROICalculator(
+          $(".calc__form"),
+          $("#savings"),
+          document.querySelector("#chart")
+        );
+        calculator.init();
+      </script>
+  
+    </div>
